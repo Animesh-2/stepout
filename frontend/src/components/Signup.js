@@ -37,7 +37,7 @@ const Signup = () => {
     e.preventDefault();
 
     await axios
-      .post("/api/auth/signup", formData)
+      .post("/api/auth/register", formData)
       .then(function (response) {
         const data = response.data;
 
