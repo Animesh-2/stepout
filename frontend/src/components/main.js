@@ -94,10 +94,10 @@ const Main = () => {
       <div className="container mx-auto mt-5 flex flex-col md:flex-row items-center">
         <div className="max-w-md mx-auto md:max-w-2xl text-center">
           <h2 className="text-2xl text-[#ee5e5f] font-bold mb-14 pb-2 border-b border-[#eca74e4f] flex flex-col md:flex-row md:items-center md:justify-center">
-            <span>Train Booking System by </span>
+            <span>IRCTC BY </span>
             <span className="md:ml-2">
               <a
-                href="https://vaibhaw.netlify.app"
+                href=""
                 target="_blank"
                 className="text-[#f0e1ce] hover:text-[#14dd25] duration-500"
                 rel="noreferrer"
@@ -120,7 +120,7 @@ const Main = () => {
                 Train Coach: A1
               </div>
               <p className="block mt-1 text-lg leading-tight font-medium text-black hover:underline cursor-default">
-                Train Number: 100001
+                Train Number: 231219
               </p>
               <p className="mt-2 text-gray-500">
                 Delhi <i className="fa-solid fa-arrow-right mx-2"></i> Banglore
