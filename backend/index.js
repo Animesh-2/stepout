@@ -9,10 +9,9 @@ import { xss } from "express-xss-sanitizer";
 import mongoSanitize from "express-mongo-sanitize";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRoutes.js";
-import adminRoutes from './routes/adminRoutes.js';
+import adminRoutes from "./routes/adminRoutes.js";
 import trainRouter from "./routes/trainRoutes.js";
-import bookRouter from './routes/bookRoutes.js';
-
+import bookRouter from "./routes/bookRoutes.js";
 
 dotenv.config();
 
@@ -20,7 +19,7 @@ const app = express();
 
 // Middleware to parse JSON body data
 app.use(express.json());
-app.use('/api/admin', adminRoutes );
+app.use("/api/admin", adminRoutes);
 
 // Using CORS
 app.use(
@@ -36,7 +35,11 @@ app.use(mongoSanitize());
 app.use(cookieParser());
 
 // Connect to the MongoDB database
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+  .connect("process.env.MONGODB_URI", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("[DB] Connection Success");
   })
@@ -45,9 +48,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   });
 
 // Routes
-// app.use("/api/train", trainRouter);
 app.use("/api/auth", authRouter);
-app.use('/api', trainRouter);
+app.use("/api", trainRouter);
 app.use("/api", bookRouter);
 
 // Handle 404 or other routes
