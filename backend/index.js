@@ -4,16 +4,15 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cron from "node-cron";
 import { spawn } from "child_process";
-
-// security packages
 import helmet from "helmet";
 import { xss } from "express-xss-sanitizer";
-import bodyParser from "body-parser";
 import mongoSanitize from "express-mongo-sanitize";
 import cookieParser from "cookie-parser";
-
-import trainRouter from "./routes/train.js";
 import authRouter from "./routes/authRoutes.js";
+import adminRoutes from './routes/adminRoutes.js';
+import trainRouter from "./routes/trainRoutes.js";
+import bookRouter from './routes/bookRoutes.js';
+
 
 dotenv.config();
 
@@ -21,6 +20,7 @@ const app = express();
 
 // Middleware to parse JSON body data
 app.use(express.json());
+app.use('/api/admin', adminRoutes );
 
 // Using CORS
 app.use(
@@ -29,40 +29,40 @@ app.use(
   })
 );
 
-// parsing data to json
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// security middlewares
-app.use(helmet()); // general security
-app.use(xss()); // xss protection
-app.use(mongoSanitize()); // sanitization for mongodb
-app.use(cookieParser()); // parsing cookies
+// Security middlewares
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
+app.use(cookieParser());
 
 // Connect to the MongoDB database
-mongoose
-  .connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("[DB] Connection Success");
   })
   .catch((err) => {
-    console.log(err.message);
+    console.error("[DB] Connection Error:", err.message);
   });
 
-// Route for handling train data and bookings
-app.use("/api/train", trainRouter);
-
-// Route for Authentication
+// Routes
+// app.use("/api/train", trainRouter);
 app.use("/api/auth", authRouter);
+app.use('/api', trainRouter);
+app.use("/api", bookRouter);
 
 // Handle 404 or other routes
 app.use("*", (req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal Server Error" });
+});
+
 // Schedule task to run seed.js file every day at 9:30 AM IST
 cron.schedule("30 4 * * *", () => {
-  //30 4 represents 9:30 AM in IST
   console.log("Running seed.js file");
   const seed = spawn("node", ["seed.js"]);
 

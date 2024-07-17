@@ -2,13 +2,16 @@ import express from "express";
 import bcrypt from "bcrypt";
 import Users from "../model/user.js";
 import { isDisposableEmail } from "../utils/checkDispose.js";
+import { isAdmin } from "../middleware/Authmiddleware.js"; // Import isAdmin middleware
+import { hashPassword, comparePasswords, generateToken } from '../utils/authUtils.js';
+
 
 const authRouter = express.Router();
 
 // Signup route
 authRouter.post("/register", async (req, res) => {
   try {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, role } = req.body; // Include role in req.body
 
     // Full name validation
     if (fullName.length < 3 || fullName.length > 26) {
@@ -64,6 +67,7 @@ authRouter.post("/register", async (req, res) => {
       fullName,
       email,
       password: hashedPassword,
+      role, // Assign role here
     });
 
     // Save the user to the database
@@ -79,38 +83,30 @@ authRouter.post("/register", async (req, res) => {
 });
 
 // Login route
-authRouter.post("/login", async (req, res) => {
+authRouter.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
     // Find the user by email
     const user = await Users.findOne({ email });
     if (!user) {
-      return res
-        .status(404)
-        .json({ status: "error", message: "User not found" });
+      return res.status(404).json({ status: 'error', message: 'User not found' });
     }
 
     // Compare the provided password with the stored hashed password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await comparePasswords(password, user.password);
     if (!isPasswordValid) {
-      return res
-        .status(401)
-        .json({ status: "error", message: "Invalid email or password" });
+      return res.status(401).json({ status: 'error', message: 'Invalid email or password' });
     }
 
-    const userData = {
-      id: user._id,
-      fullName: user.fullName,
-      email: user.email,
-    };
+    // Generate JWT token
+    const token = generateToken({ userId: user._id, email: user.email });
 
-    res
-      .status(200)
-      .json({ status: "success", message: "Login successful", user: userData });
+    // Send token as response
+    res.status(200).json({ status: 'success', token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ status: "error", message: "Internal Server Error" });
+    res.status(500).json({ status: 'error', message: 'Internal Server Error' });
   }
 });
 
