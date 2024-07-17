@@ -1,38 +1,40 @@
-
-
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const trainSchema = new mongoose.Schema({
   trainNumber: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+  },
+  trainName: {
+    type: String,
+    unique: true,
   },
   source: {
     type: String,
-    required: true
+    required: true,
   },
   destination: {
     type: String,
-    required: true
+    required: true,
   },
   totalSeats: {
     type: Number,
     required: true,
-    min: 0
+    min: 0,
   },
   bookedSeats: {
     type: Number,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
-trainSchema.methods.isSeatAvailable = function(seatNumber) {
+trainSchema.methods.isSeatAvailable = function (seatNumber) {
   // Example logic to check if seat is available
   return this.bookedSeats < this.totalSeats;
 };
 
-trainSchema.methods.bookSeat = function(seatNumber) {
+trainSchema.methods.bookSeat = function (seatNumber) {
   // Example logic to book a seat
   if (this.isSeatAvailable(seatNumber)) {
     this.bookedSeats++;
@@ -41,7 +43,6 @@ trainSchema.methods.bookSeat = function(seatNumber) {
   return false;
 };
 
-const Train = mongoose.model('Train', trainSchema);
+const Train = mongoose.model("Train", trainSchema);
 
 export default Train;
-

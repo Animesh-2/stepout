@@ -9,7 +9,7 @@ const router = express.Router();
 // Endpoint to add a new train
 router.post("/train", authenticateJWT, isAdmin, async (req, res) => {
   try {
-    const { source, destination, totalSeats, trainNumber } = req.body;
+    const { source, destination, totalSeats, trainNumber,trainName } = req.body;
 
     // Validate input
     if (!source || !destination || !totalSeats || !trainNumber) {
@@ -32,6 +32,7 @@ router.post("/train", authenticateJWT, isAdmin, async (req, res) => {
       destination,
       totalSeats,
       trainNumber,
+      trainName,
     });
 
     // Save the train to the database

@@ -65,16 +65,40 @@ router.post("/book", authenticateJWT, async (req, res) => {
   }
 });
 
-router.get(`/bookings/:bookingId`, authenticateJWT, async (req, res) => {
-  const { bookingId } = req.params;
+router.get("/bookings/train/:trainId", authenticateJWT, async (req, res) => {
+  const { trainId } = req.params;
+
   try {
-    // const booking = await Booking.findById(bookingId).populate("train").exec();
-    const booking = await Booking.findById(bookingId)
-      .populate({
-        path: "train",
-        options: { strictPopulate: false },
-      })
-      .exec();
+    // Validate trainId
+    if (!mongoose.Types.ObjectId.isValid(trainId)) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Invalid train ID" });
+    }
+
+    // Find all bookings for the specified trainId and get the distinct seat numbers
+    const bookedSeats = await Booking.find({ trainId }).distinct("seatNumber");
+
+    res.status(200).json({ status: "success", bookedSeats });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: "error", message: "Server error" });
+  }
+});
+
+router.get("/bookings/:bookingId", authenticateJWT, async (req, res) => {
+  const { bookingId } = req.params;
+
+  try {
+    // Validate bookingId
+    if (!mongoose.Types.ObjectId.isValid(bookingId)) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Invalid booking ID" });
+    }
+
+    // Find the booking by bookingId and populate the train information
+    const booking = await Booking.findById(bookingId).populate("train");
 
     if (!booking) {
       return res
@@ -82,13 +106,11 @@ router.get(`/bookings/:bookingId`, authenticateJWT, async (req, res) => {
         .json({ status: "error", message: "Booking not found" });
     }
 
-    // Ensure the booking belongs to the authenticated user (if required)
-    // Example check: if (booking.bookedBy !== req.user.userId) { ... }
-
     res.status(200).json({ status: "success", booking });
   } catch (error) {
     console.error(error);
     res.status(500).json({ status: "error", message: "Server error" });
   }
 });
+
 export default router;
