@@ -42,7 +42,6 @@ const connectToMongoDB = async () => {
   }
 };
 
-connectToMongoDB();
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api", trainRouter);
@@ -79,4 +78,7 @@ cron.schedule("30 4 * * *", () => {
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => {
+  connectToMongoDB();
+  console.log(`Server started on port ${PORT}`);
+});
