@@ -12,7 +12,6 @@ import authRouter from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import trainRouter from "./routes/trainRoutes.js";
 import bookRouter from "./routes/bookRoutes.js";
-
 dotenv.config();
 
 const app = express();
@@ -34,7 +33,6 @@ app.use(xss());
 app.use(mongoSanitize());
 app.use(cookieParser());
 
-// Connect to the MongoDB database
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
