@@ -1,16 +1,13 @@
 
 # Myntra - (Clone)
-
-Myntra is an e-commerce website where people can buy from wide range of products and has an interactive UI. 
-
-A Collaborative project built by a team of 5 executed in 4 days.
+This project is a web application designed for booking train tickets. It provides users with functionalities to search for trains based on source and destination, view available seats, and book seats securely. The application supports user authentication and authorization, allowing administrators to manage train schedules and bookings effectively.
 
 
 ![Logo](https://github.com/Animesh-2/stepout/blob/main/frontend/public/train.png)
 
 
 ## Demo  🎥
-- Video Link:- [User Manual](https://youtu.be/b2xNnRaI3_M)
+- Video Link:- [User Manual](https://vimeo.com/manage/videos/986287504?record_session_id=5a1a3928-567b-4bed-9ab4-0ae8d50e6a2f)
 
 - Deployed Link:- [Enjoy the Experience](https://calm-malasada-c0860b.netlify.app)
 
