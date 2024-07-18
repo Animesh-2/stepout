@@ -1,5 +1,5 @@
 
-# Myntra - (Clone)
+# TrainBooking
 This project is a web application designed for booking train tickets. It provides users with functionalities to search for trains based on source and destination, view available seats, and book seats securely. The application supports user authentication and authorization, allowing administrators to manage train schedules and bookings effectively.
 
 
