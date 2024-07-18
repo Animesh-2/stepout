@@ -1,0 +1,62 @@
+.home-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.search-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+.train-results {
+  margin-top: 20px;
+}
+
+.train-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.train-item.selected {
+  border-color: blue;
+  background-color: lightblue;
+}
+
+.seat-booking-form {
+  margin-top: 20px;
+}
+
+.seat-booking-form input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.message {
+  color: red;
+  margin-top: 10px;
+}

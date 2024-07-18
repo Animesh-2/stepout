@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css';
+import './Login.css'; // Import the CSS file
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-      setMessage(response.data.message);
-      if (response.data.status === 'success') {
-        localStorage.setItem('token', response.data.token);
-        navigate('/');
-      }
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+      const token = response.data.token;
+      localStorage.setItem('jwtToken', token); // Store the token in local storage
+      setMessage('Login successful!');
+      // Optionally, redirect to a protected route or handle login success behavior
     } catch (error) {
       setMessage(error.response.data.message || 'Login failed');
     }
@@ -37,7 +37,7 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };

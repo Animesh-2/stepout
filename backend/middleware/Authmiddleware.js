@@ -1,17 +1,10 @@
 // middleware/Authmiddleware.js
 import Users from "../model/user.js";
 
+
 export const isAdmin = async (req, res, next) => {
   try {
-    // const { email } = req.body;
-
-    // if (!email) {
-    //   return res
-    //     .status(400)
-    //     .json({ status: "error", message: "Email is required" });
-    // }
-
-    // const user = await Users.findOne({ email });
+    
     const userId = req.user.userId; // assuming the user ID is set by authenticateJWT middleware
 
     const user = await Users.findById(userId);
@@ -27,3 +20,5 @@ export const isAdmin = async (req, res, next) => {
     res.status(500).json({ status: "error", message: "Server error" });
   }
 };
+// middleware/Authmiddleware.js
+

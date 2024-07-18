@@ -18,7 +18,6 @@ const app = express();
 
 // Middleware to parse JSON body data
 app.use(express.json());
-app.use("/api/admin", adminRoutes);
 
 // Using CORS
 app.use(
@@ -43,6 +42,7 @@ const connectToMongoDB = async () => {
 };
 
 // Routes
+app.use("/api/admin", adminRoutes);
 app.use("/api/auth", authRouter);
 app.use("/api", trainRouter);
 app.use("/api", bookRouter);
