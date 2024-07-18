@@ -7,9 +7,9 @@ This project is a web application designed for booking train tickets. It provide
 
 
 ## Demo  🎥
-- Video Link:- [User Manual](https://vimeo.com/manage/videos/986287504?record_session_id=5a1a3928-567b-4bed-9ab4-0ae8d50e6a2f)
+- Video Link:- [<- Click here to see the video of project](https://vimeo.com/manage/videos/986287504?record_session_id=5a1a3928-567b-4bed-9ab4-0ae8d50e6a2f)
 
-- Deployed Link:- [Enjoy the Experience](https://calm-malasada-c0860b.netlify.app)
+- Deployed Link:- [Enjoy the Experience](https://stepout-oz3ntl4wd-animesh-2s-projects.vercel.app/)
 
 
 ## Tech Stack 💻
@@ -23,58 +23,18 @@ This project is a web application designed for booking train tickets. It provide
 
 
 ## Features ✨
-
-- Authentication process undercover with Local Storage.
-- Pagination for each category with working mega dropdown.
-- Dynamic Products, Wishlist page using locally created json data.
-- All the product description, prices, discounts, are updated in real time.
+User Authentication: Secure user login and registration system using JWT authentication.
+Train Search: Search trains by entering source and destination stations.
+Seat Availability: Display available seats for selected trains in real-time.
+Booking Management: Book seats and manage bookings seamlessly.
+Admin Dashboard: Admin panel for managing train schedules, adding new trains, and viewing booking details.
+Real-time Updates: Instant updates on seat availability and booking status.
 
 ## Responsibilities 💪
+Frontend: React.js, Axios, JWT-decode, CSS
+Backend: Node.js, Express.js, MongoDB, Mongoose
+Authentication: JSON Web Tokens (JWT)
+Database: MongoDB
 
-- Landing page UI consisting of megadrown navbar, carasouel, animated image cards and authentications i.e.; Login & Register 
-- Paginations for each sub-sections
-- Implementation of local storage on authentications
-- Address, payment, checkout done with using local storage concepts and raw css (No external libraries has been implemented for the same to have a effect !!)
-
-## Snap Shots 📷
-
-**Home Page**
-
-![Logo](https://images2.imgbox.com/c0/b8/9A3OPB3n_o.jpg)
-
-**Mega DropDown**
-
-![Logo](https://images2.imgbox.com/fc/50/uwwSDxEF_o.jpg)
-
-**Products Page**
-
-![Logo](https://images2.imgbox.com/b1/79/Ajcc0vIR_o.jpg)
-
-**Products Details Page**
-
-![Logo](https://images2.imgbox.com/5c/5a/ALM6fjk4_o.jpg)
-
-**WishList Page**
-
-![Logo](https://images2.imgbox.com/a3/f8/mt96qGyy_o.jpg)
-
-**Cart Page**
-
-![Logo](https://images2.imgbox.com/5c/84/veOWEFoY_o.jpg)
-
-**Address Page**
-
-![Logo](<Screenshot (94).png>)
-
-**Payment Page**
-![Logo](<Screenshot (96).png>)
-
-
-## Contributors  😇
-
-
-- 👤 [Rupan Das](https://www.github.com/Rupan510)
-- 👤 [Divyam Rauthan](https://www.github.com/DivYam062)
-- 👤 [Aman Garg](https://www.github.com/AG7464)
-- 👤 [Pankaj Khatri](https://www.github.com/MrPK4699)
+##Solo project
 - 👤 [Animesh Singh](https://www.github.com/Animesh-2)
