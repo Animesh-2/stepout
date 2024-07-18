@@ -1,22 +1,23 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { AuthProtect } from "./AuthProtect";
-import Login from "./components/Login";
-import Main from "./components/main";
-import Signup from "./components/Signup";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "./Components/Register";
+import Home from "./Components/Home";
+import Navbar from "./Components/Navbar";
+import Login from "./Components/Login";
+import CreateTrain from "./Components/CreateTrain";
 
 function App() {
   return (
-    <BrowserRouter>
+    <div className="App">
+      <Navbar />
       <Routes>
-        <Route path="/login" element={<AuthProtect element={<Login />} />} />
-
-        <Route path="/signup" element={<AuthProtect element={<Signup />} />} />
-
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin/train" element={<CreateTrain />} />
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 

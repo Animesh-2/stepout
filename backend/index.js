@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-// Security middlewares
+// // Security middlewares
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
